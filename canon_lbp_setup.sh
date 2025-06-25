@@ -4,7 +4,7 @@
 #Version 3.3 updated on September 13, 2019
 #http://help.ubuntu.ru/wiki/canon_capt
 #http://forum.ubuntu.ru/index.php?topic=189049.0
-#Translated into English and modified by @hieplpvip
+#Translated into English and modified by @sonnguyenht
 ##################################################
 
 #Check if we are running as root
@@ -26,14 +26,14 @@ DRIVER_VERSION='2.71-1'
 DRIVER_VERSION_COMMON='3.21-1'
 
 #Links to driver packages
-declare -A URL_DRIVER=([amd64_common]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/cndrvcups-common_3.21-1_amd64.deb' \
-[amd64_capt]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/cndrvcups-capt_2.71-1_amd64.deb' \
-[i386_common]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/cndrvcups-common_3.21-1_i386.deb' \
-[i386_capt]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/cndrvcups-capt_2.71-1_i386.deb')
+declare -A URL_DRIVER=([amd64_common]='https://github.com/sonnguyenht/ubuntu_canon_printer/raw/master/Packages/cndrvcups-common_3.21-1_amd64.deb' \
+[amd64_capt]='https://github.com/sonnguyenht/ubuntu_ubuntu_canon_printer/raw/refs/heads/master/Packages/cndrvcups-capt_2.71-1_amd64.deb' \
+[i386_common]='https://github.com/sonnguyenht/ubuntu_canon_printer/raw/master/Packages/cndrvcups-common_3.21-1_i386.deb' \
+[i386_capt]='https://github.com/sonnguyenht/ubuntu_canon_printer/raw/master/Packages/cndrvcups-capt_2.71-1_i386.deb')
 
 #Links to autoshutdowntool
-declare -A URL_ASDT=([amd64]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/autoshutdowntool_1.00-1_amd64_deb.tar.gz' \
-[i386]='https://github.com/hieplpvip/canon_printer/raw/master/Packages/autoshutdowntool_1.00-1_i386_deb.tar.gz')
+declare -A URL_ASDT=([amd64]='https://github.com/sonnguyenht/ubuntu_canon_printer/raw/master/Packages/autoshutdowntool_1.00-1_amd64_deb.tar.gz' \
+[i386]='https://github.com/sonnguyenht/ubuntu_canon_printer/raw/master/Packages/autoshutdowntool_1.00-1_i386_deb.tar.gz')
 
 #ppd files and printer models mapping
 declare -A LASERSHOT=([LBP-810]=1120 [LBP1120]=1120 [LBP1210]=1210 \
@@ -185,6 +185,7 @@ function canon_install() {
 		sudo -u $LOGIN_USER wget -O $CAPT_FILE ${URL_DRIVER[${ARCH}_capt]}
 		check_error WGET $? $CAPT_FILE
 	fi
+	dpkg --add-architecture i386
 	apt-get -y update
 	apt-get -y install libglade2-0 libcanberra-gtk-module
 	check_error PACKAGE $?
@@ -267,7 +268,7 @@ exit 0' > /etc/init.d/ccpd
 	service cups restart
 	if [ $ARCH == 'amd64' ]; then
 		echo 'Installing 32-bit libraries required to run 64-bit printer driver'
-		apt-get -y install libatk1.0-0:i386 libcairo2:i386 libgtk2.0-0:i386 libpango1.0-0:i386 libstdc++6:i386 libpopt0:i386 libxml2:i386 libc6:i386
+		apt-get -y install libatk1.0-0:i386 libcairo2:i386 libgtk2.0-0:i386 libpango-1.0.0:i386 libstdc++6:i386 libpopt0:i386 libxml2:i386 libc6:i386
 		check_error PACKAGE $?
 	fi
 	echo 'Installing the printer in CUPS'

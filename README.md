@@ -2,7 +2,7 @@
 Script for installing the Linux CAPT Printer Driver for Canon LBP printers on Ubuntu (both 32-bit and 64-bit)
 ### Install
 ```
-wget https://github.com/hieplpvip/canon_printer/raw/master/canon_lbp_setup.sh
+wget https://github.com/sonnguyenHT/ubuntu_ubuntu_canon_printer/raw/master/canon_lbp_setup.sh
 chmod +x canon_lbp_setup.sh
 ./canon_lbp_setup.sh
 ```
@@ -46,3 +46,4 @@ After installation, there will be a shortcut on your Desktop. Run it to check yo
 - LBP9200C
 ### Original Script
 http://help.ubuntu.ru/wiki/canon_capt
+### Fork from https://github.com/sonnguyenht/ubuntu_ubuntu_canon_printer
